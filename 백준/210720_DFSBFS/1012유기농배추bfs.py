@@ -4,18 +4,21 @@ read=sys.stdin.readline
 sys.setrecursionlimit(100000)
 # dfs 정의
 
-def dfs(x,y):
+def bfs(x,y):
     # 상하좌우
     dx=[-1,1,0,0]
     dy=[0,0,-1,1]
     cabbage_field[x][y]=0
-    q=deque()
-    q.append([x,y])
-    for i in range(4):
-        nx=x+dx[i]
-        ny=y+dy[i]
-        if 0<=nx<N and 0<=ny<M and cabbage_field[nx][ny]==1:
-            dfs(nx,ny)
+    queue=deque()
+    queue.append([x,y])
+    while queue:
+        a,b=queue.popleft()
+        for i in range(4):
+            nx=a+dx[i]
+            ny=b+dy[i]
+            if 0<=nx<N and 0<=ny<M and cabbage_field[nx][ny]==1:
+                cabbage_field[nx][ny]=0
+                queue.append([nx,ny])
             
 
 
@@ -41,19 +44,7 @@ for _ in range(T):
     for i in range(N):
         for j in range(M):
             if cabbage_field[i][j]==1:
-                dfs(i,j)
+                bfs(i,j)
                 cnt+=1
     print(cnt)
-    dx=[-1,1,0,0]
-    dy=[0,0,-1,1]
-    cabbage_field[x][y]=0
-    queue=deque()
-    queue.append([x,y])
-    while queue:
-        a,b=queue.popleft()
-        for i in range(4):
-            nx=a+dx[i]
-            ny=b+dy[i]
-            if 0<=nx<N and 0<=ny<M and cabbage_field[nx][ny]==1:
-                cabbage_field[nx][ny]=0
-                queue.append([nx,ny])
+    

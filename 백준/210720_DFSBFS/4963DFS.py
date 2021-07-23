@@ -15,7 +15,7 @@ def dfs(x,y):
     for i in range(8):
         nx=x+dx[i]
         ny=y+dy[i]
-        print(nx,ny)
+        # print(nx,ny)
         if 0<=nx<h and 0<=ny<w:
             if field[nx][ny]==1:
                 dfs(nx,ny)

@@ -9,7 +9,7 @@ def dfs(graph,start,visited):
     for node in graph[start]:
         if not visited[node]:
             dfs(graph,node,visited)
-
+# BFS 정의
 def bfs(graph,start,visited):
     queue=deque([start])
     visited[start]=True
