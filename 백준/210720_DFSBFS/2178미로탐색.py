@@ -15,6 +15,7 @@ dx, dy = [-1, 1, 0, 0], [0, 0, -1, 1]
 queue = deque()
 queue.append([0,0])
 visited[0][0] = 1
+print(matrix)
 
 while queue:
     x, y = queue.popleft()
@@ -31,3 +32,4 @@ while queue:
             if visited[nx][ny] == 0 and matrix[nx][ny] == 1:
                 visited[nx][ny] = visited[x][y] + 1
                 queue.append((nx,ny))
+print(visited)
