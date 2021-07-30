@@ -15,6 +15,6 @@ for i in range(N):
     for k in range(i):
         if sequence_list[i]>sequence_list[k]: #리스트 앞을 돌면서 뒤에 숫자가 작은 
             d[i]=max(d[i],d[k]+1)
-            print(d)
+            # print(d)
             
 print(max(d))
