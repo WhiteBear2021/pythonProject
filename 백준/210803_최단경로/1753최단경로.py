@@ -9,14 +9,17 @@ N,M=map(int,input().split())
 start=int(input())
 
 graph=[[] for i in range(N+1)]
-# idx값이 정점 번호라 생각하고 안에 들어있는 값은 시작점에서 정점까지 가는데 드는 비용을 넣을 것이다
+# idx값이 정점 번호라 생각하고 배열 안에 들어있는 값은 
+# 시작점에서 정점까지 가는데 드는 비용을 넣을 것이다
 # 초기값으로는 무한대 값을 설정해서 넣어놓는다
 cost_arr=[INF]*(N+1)
 
 for _ in range(M):
-    # 시작정점번호, 끝정점번호, 정점까지의 비용
-    a,b,c=map(int,input().split())
-    graph[a].append((b,c))
+    # 시작정점번호(first_node), 
+    # 연결된정점번호(second_node), 
+    # 시작부터 연결된정점까지의 비용(first_to_second_cost)
+    first_node,second_node,first_to_second_cost=map(int,input().split())
+    graph[first_node].append((second_node,first_to_second_cost))
     
 def dijkstra(start):
     q=[]
@@ -46,3 +49,13 @@ for i in range(1,N+1):
         print("INF")
     else:
         print(cost_arr[i])
+
+
+# 5 6
+# 1
+# 5 1 1
+# 1 2 2
+# 1 3 3
+# 2 3 4
+# 2 4 5
+# 3 4 6

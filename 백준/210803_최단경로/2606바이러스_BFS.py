@@ -7,10 +7,8 @@ def bfs(graph,start,visited):
     visited[start]=True
     cnt=0
     while queue:
-        print(queue)
         v=queue.popleft()
         for i in graph[v]:
-            if not visited[i]:
                 queue.append(i)
                 cnt+=1
                 visited[i]=True
@@ -26,8 +24,8 @@ graph=[[] for _ in range(N+1)]
 for _ in range(M):
     a,b=map(int,read().split())
     graph[a].append(b)
+    graph[b].append(a)
 
 visited_arr=[False]*(N+1)
 
 print(bfs(graph,1,visited_arr))
-print(visited_arr)
