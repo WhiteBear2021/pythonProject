@@ -15,17 +15,24 @@ for _ in range(E):
     a,b,c=map(int,input().split())
     graph[a][b]=c
 sum=INF
-for k in range(1,V+1):
+for i in range(1,V+1):
+    if graph[i][i]!=INF:
+        sum=min(sum,graph[i][i])
+if sum!=INF:
+    print(sum)
+else:
+    for k in range(1,V+1):
+        for a in range(1,V+1):
+            for b in range(1,V+1):
+                graph[a][b]=min(graph[a][b],graph[a][k]+graph[k][b])
+
     for a in range(1,V+1):
         for b in range(1,V+1):
-            graph[a][b]=min(graph[a][b],graph[a][k]+graph[k][b])
-            graph[b][a]=min(graph[b][a],graph[b][k]+graph[k][a])
-            if graph[a][b]<INF and graph[b][a]<INF:
-                if graph[a][b]+graph[b][a]<sum:
-                   sum=graph[a][b]+graph[b][a] 
+            if graph[a][b]+graph[b][a]<sum:
+                sum=graph[a][b]+graph[b][a] 
 
-# print(graph)
-if sum==INF:
-    print(-1)
-else:
-    print(sum)
+    # print(graph)
+    if sum==INF:
+        print(-1)
+    else:
+        print(sum)
