@@ -12,3 +12,5 @@ def solution(numOfStairs):
     answer = d[numOfStairs]
     return answer
 
+
+    
