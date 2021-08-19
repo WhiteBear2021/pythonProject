@@ -1,9 +1,14 @@
 array = [5, 3, 2, 1, 6, 8, 7, 4]
 
 
-def merge_sort(array):
-    # 이 곳을 채워보세요!
-    return array
+def merge_sort(arr):
+    if len(arr)<=1:
+        return arr
+    mid=len(arr)//2
+    left_arr=merge_sort(arr[:mid])
+    right_arr=merge_sort(arr[mid:])
+    
+    return merge(left_arr,right_arr)
 
 
 def merge(array1, array2):
