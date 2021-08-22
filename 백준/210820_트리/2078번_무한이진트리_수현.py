@@ -1,14 +1,17 @@
-import sys
-input=sys.stdin.readline
+L, R = map(int, input().split())
+left, right = 0,0
 
-# L,R 좌표
-a,b=map(int,input().split())
-L,R=0,0
-while a!=1 or b!=1:
-    if a<b:
-        b-=a
-        R+=1
+while True:
+    if L == 1:
+        right += (R-1)
+        break
+    elif R == 1:
+        left += (L-1)
+        break
+    elif L > R:
+        left+=L//R
+        L = L%R
     else:
-        a-=b
-        L+=1
-print(L,R)
+        right+=R//L
+        R = R%L
+print(left, right)
