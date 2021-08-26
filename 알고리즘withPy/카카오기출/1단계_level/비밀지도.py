@@ -1,3 +1,4 @@
+# 비밀지도
 # 네오는 평소 프로도가 비상금을 숨겨놓는 장소를 알려줄 비밀지도를 손에 넣었다. 그런데 이 비밀지도는 숫자로 암호화되어 있어 위치를 확인하기 위해서는 암호를 해독해야 한다. 다행히 지도 암호를 해독할 방법을 적어놓은 메모도 함께 발견했다.
 
 # 지도는 한 변의 길이가 n인 정사각형 배열 형태로, 각 칸은 "공백"(" ") 또는 "벽"("#") 두 종류로 이루어져 있다.
@@ -5,7 +6,9 @@
 # "지도 1"과 "지도 2"는 각각 정수 배열로 암호화되어 있다.
 # 암호화된 배열은 지도의 각 가로줄에서 벽 부분을 1, 공백 부분을 0으로 부호화했을 때 얻어지는 이진수에 해당하는 값의 배열이다.
 
-# 입출력 예제
+# print(list(map(int,bin(98)[2:])))
+# bin(숫자) 함수랑 똑같은 format(값,'#b'),  #b 대신 b 쓰면 접두어 빠짐
+
 # 매개변수	값
 # n	5
 # arr1	[9, 20, 28, 18, 11]
@@ -19,15 +22,23 @@
 
 def solution(n, arr1, arr2):
     answer = []
-    for a1,a2 in zip(arr1,arr2):
-        val=str(bin(a1|a2))[2:].zfill(n)
-        
-        # print(val)
-        val=val.replace("1","#").replace("0"," ")
-        # print(val)
+    b_arr1=[]
+    b_arr2=[]
+    for i in range(n):
+        b_val_list1=list(map(int,bin(arr1[i])[2:].zfill(n)))
+        b_val_list2=list(map(int,bin(arr2[i])[2:].zfill(n)))
+        b_arr1.append(b_val_list1)
+        b_arr2.append(b_val_list2)
+    print(b_arr1,b_arr2,sep="\n")
+    
+    for i in range(n):
+        val=""
+        for j in range(n):
+            if b_arr1[i][j]==1 or b_arr2[i][j]==1:
+                val+="#"
+            else:
+                val+=" "
         answer.append(val)
     return answer
 
 print(solution(5,[9, 20, 28, 18, 11],[30, 1, 21, 17, 28]))
-
-
