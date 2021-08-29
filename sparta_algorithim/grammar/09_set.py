@@ -13,4 +13,5 @@ b_set=set(b)
 
 # 교집합
 print(a_set & b_set)
+# 합집합
 print(a_set | b_set)
