@@ -1,12 +1,15 @@
 def solution(priorities, location):
     answer = 0
-    queue=[]
+    
     importance=[0]*10
     for i in range(len(importance)):
         importance[i]=priorities.count(i)
     print(importance)
+    queue=[]
     for i in range(len(priorities)):
         queue.append((priorities[i],i))
+    # 리스트 컴프리핸션 이용
+    # queue =  [(i,p) for i,p in enumerate(priorities)]
     print(queue)
     cnt=0
     for k in range(9,0,-1):
