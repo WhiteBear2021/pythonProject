@@ -1,0 +1,73 @@
+from collections import deque
+# 1. 빨간 구슬과 파란 구슬을 기울인 방향에 대해서 갈 수 있는 만큼 이동했을 때의 좌표를 구한다
+
+# 2. 중간에 파란 구슬이 구멍에 빠지면 continue하여 다른 방향으로 기울인 경우로 넘어간다
+
+# 3. 빨간 구슬과 파란 구슬이 겹치면 각각 이동한 길이를 구하여 앞뒤로 위치하도록 처리한다
+
+# 4. 빨간 구슬이 빠지면 기울인 횟수를 출력하고 10번이 넘어가면 -1 출력 
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+
+def bfs(rx, ry, bx, by, cnt):
+    q.append([rx, ry, bx, by])
+    c.append([rx, ry, bx, by])
+    while q:
+        qlen = len(q)
+        while qlen:
+            rx, ry, bx, by = q.popleft()
+            if a[rx][ry] == 'O':
+                print(cnt)
+                return
+            for i in range(4):
+                nrx, nry, nbx, nby = rx, ry, bx, by
+                while True:
+                    nrx += dx[i]; nry += dy[i]
+                    if a[nrx][nry] == 'O':
+                        break
+                    if a[nrx][nry] == '#':
+                        nrx -= dx[i]; nry -= dy[i]
+                        break
+                while True:
+                    nbx += dx[i]; nby += dy[i]
+                    if a[nbx][nby] == 'O':
+                        break
+                    if a[nbx][nby] == '#':
+                        nbx -= dx[i]; nby -= dy[i]
+                        break
+
+                if a[nbx][nby] == 'O':
+                    continue
+                if nrx == nbx and nry == nby:
+                    if abs(rx - nrx) + abs(ry - nry) > abs(bx - nbx) + abs(by - nby):
+                        nrx -= dx[i]; nry -= dy[i]
+                    else:
+                        nbx -= dx[i]; nby -= dy[i]
+
+                if [nrx, nry, nbx, nby] not in c:
+                    c.append([nrx, nry, nbx, nby])
+                    q.append([nrx, nry, nbx, nby])
+            qlen -= 1
+
+        if cnt == 10:
+            print(-1)
+            return
+        cnt += 1
+    print(-1)
+    return
+
+n, m = map(int, input().split())
+a = [[] for _ in range(n)]
+c, q, cnt = [], deque(), 0
+
+for i in range(n):
+        a[i] = list(map(str, input()))
+        for j in range(m):
+            if a[i][j] == 'R':
+                rx, ry = i, j
+                a[i][j] = '.'
+            elif a[i][j] == 'B':
+                bx, by = i, j;
+                a[i][j] = '.'
+
+bfs(rx, ry, bx, by, cnt)
